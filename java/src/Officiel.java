@@ -38,8 +38,21 @@ public class Officiel implements Comparable{
 		return this.nom+","+this.prenom;
 	}
 	public String get_NomPrenomStDt() {
-		return this.nom+","+this.prenom+","+this.libelle+","+this.match_date;
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		return this.nom+","+this.prenom+","+this.libelle+","+sdf.format(this.match_date);
 	}
+	public String get_NomPrenomDt() {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+		return this.nom+","+this.prenom+","+sdf.format(this.match_date);
+	}
+	public String get_Statut() {
+		return this.libelle;
+	}
+	public String get_DateMatchOutput() {
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		return sdf.format(this.match_date);
+	}
+
 
 	@Override
 	public int hashCode() {
@@ -72,7 +85,7 @@ public class Officiel implements Comparable{
 		return true;
 	}
 	
-	public Date getMatch_date() {
+	public Date get_Match_date() {
 		return match_date;
 	}
 
@@ -82,14 +95,12 @@ public class Officiel implements Comparable{
 
 	@Override
 	public String toString() {
-		return this.get_NomPrenom() + " - " + this.getMatch_date();
+		return this.get_NomPrenomDt();
 	}
 
 	@Override
 	public int compareTo(Object o) {
 		//return  this.get_NomPrenom().compareTo(((Officiel) o).get_NomPrenom()) ;
-		return this.get_NomPrenom().compareTo(((Officiel) o).get_NomPrenom()) + this.getMatch_date().compareTo(((Officiel) o).match_date);
+		return this.get_NomPrenomDt().compareTo(((Officiel) o).get_NomPrenomDt());
 	}
-	
-
 }
